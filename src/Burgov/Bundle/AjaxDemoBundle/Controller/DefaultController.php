@@ -4,6 +4,7 @@ namespace Burgov\Bundle\AjaxDemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -26,6 +27,10 @@ class DefaultController extends Controller
         $error = $request->query->get('error', false);
 
         sleep($delay);
+
+        if ($error >= 2) {
+            throw new \RuntimeException('Something random has gone terribly wrong');
+        }
 
         return new Response('', $error ? 400 : 200);
     }

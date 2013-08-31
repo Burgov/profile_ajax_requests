@@ -9,17 +9,17 @@
             };
             $scope.methods = ["GET", "PUT", "POST", "DELETE"];
 
-            $scope.jQueryAjax = function(forceFail) {
+            $scope.jQueryAjax = function(errorLevel) {
                 $timeout(function() {
                     $.ajax({
-                        url: "{{ path('ajax') }}?error="+(forceFail ? 1 : 0),
+                        url: "{{ path('ajax') }}?error="+(errorLevel || 0),
                         type: $scope.params.method
                     });
                 }, $scope.params.delay * 1000);
             }
-            $scope.angularAjax = function(forceFail) {
+            $scope.angularAjax = function(errorLevel) {
                 $timeout(function() {
-                    $http[$scope.params.method.toLowerCase()]("{{ path('ajax') }}?error="+(forceFail ? 1 : 0));
+                    $http[$scope.params.method.toLowerCase()]("{{ path('ajax') }}?error="+(errorLevel || 0));
                 }, $scope.params.delay * 1000)
             }
         });
@@ -34,8 +34,8 @@
         <div><label for="method">Method:</label> <select ng-model="params.method" ng-options="method for method in methods"></select></div>
     </div>
 
-    <div>Trigger jQuery AJAX request: <a ng-click="jQueryAjax()">200</a> <a ng-click="jQueryAjax(true)">400</a></div>
-    <div>Trigger angular AJAX request: <a ng-click="angularAjax()">200</a> <a ng-click="angularAjax(true)">400</a></div>
+    <div>Trigger jQuery AJAX request: <a ng-click="jQueryAjax()">200</a> <a ng-click="jQueryAjax(1)">400</a> <a ng-click="jQueryAjax(2)">500</a></div>
+    <div>Trigger angular AJAX request: <a ng-click="angularAjax()">200</a> <a ng-click="angularAjax(1)">400</a> <a ng-click="angularAjax(2)">500</a></div>
 
 </div>
 {% endblock %}
