@@ -1,0 +1,5 @@
+burgov_ajax_demo:
+    resource: "@BurgovAjaxDemoBundle/Controller"
+    prefix:   /
+    type: annotation
+
