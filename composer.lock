@@ -611,12 +611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Burgov/symfony.git",
-                "reference": "87c3cd2854f8b279b0be25886bea07731953e665"
+                "reference": "fec39f6ecfb0ad150bbd56256aa293bbc4dfe1db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Burgov/symfony/zipball/87c3cd2854f8b279b0be25886bea07731953e665",
-                "reference": "87c3cd2854f8b279b0be25886bea07731953e665",
+                "url": "https://api.github.com/repos/Burgov/symfony/zipball/fec39f6ecfb0ad150bbd56256aa293bbc4dfe1db",
+                "reference": "fec39f6ecfb0ad150bbd56256aa293bbc4dfe1db",
                 "shasum": ""
             },
             "require": {
@@ -713,7 +713,7 @@
             "support": {
                 "source": "https://github.com/Burgov/symfony/tree/profile_ajax_requests"
             },
-            "time": "2013-08-31 09:04:17"
+            "time": "2013-09-02 07:31:35"
         },
         {
             "name": "twig/extensions",
