@@ -5,21 +5,22 @@
         angular.module('AjaxDemo', []).controller('ajaxCtrl', function($scope, $http, $timeout) {
             $scope.params = {
                 delay: 1,
-                method: "GET"
+                method: "GET",
+                duration: 1
             };
             $scope.methods = ["GET", "PUT", "POST", "DELETE"];
 
             $scope.jQueryAjax = function(errorLevel) {
                 $timeout(function() {
                     $.ajax({
-                        url: "{{ path('ajax') }}?error="+(errorLevel || 0),
+                        url: "{{ path('ajax') }}?duration="+$scope.params.duration+"&error="+(errorLevel || 0),
                         type: $scope.params.method
                     });
                 }, $scope.params.delay * 1000);
             }
             $scope.angularAjax = function(errorLevel) {
                 $timeout(function() {
-                    $http[$scope.params.method.toLowerCase()]("{{ path('ajax') }}?error="+(errorLevel || 0));
+                    $http[$scope.params.method.toLowerCase()]("{{ path('ajax') }}?duration="+$scope.params.duration+"&error="+(errorLevel || 0));
                 }, $scope.params.delay * 1000)
             }
         });
@@ -30,7 +31,8 @@
 <div ng-controller="ajaxCtrl">
 
     <div>
-        <div><label for="delay">Delay:</label> <input type="number" id="delay" ng-model="params.delay"></div>
+        <div><label for="delay">Delay:</label> <input type="number" min="0" max="10" id="delay" ng-model="params.delay"></div>
+        <div><label for="delay">Request duration:</label> <input type="number" min="0" max="10" id="duration" ng-model="params.duration"></div>
         <div><label for="method">Method:</label> <select ng-model="params.method" ng-options="method for method in methods"></select></div>
     </div>
 

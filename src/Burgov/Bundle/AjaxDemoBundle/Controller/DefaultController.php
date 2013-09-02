@@ -22,11 +22,13 @@ class DefaultController extends Controller
      * @Route("/ajax", name="ajax")
      */
     public function ajaxAction(Request $request) {
-        $delay = $request->query->get('delay', 1);
-        $delay = min(max($delay, 1), 10);
+        $duration = $request->query->get('duration', 1);
+        $duration = min(max($duration, 0), 10);
         $error = $request->query->get('error', false);
 
-        sleep($delay);
+        if ($duration > 0) {
+            sleep($duration);
+        }
 
         if ($error >= 2) {
             throw new \RuntimeException('Something random has gone terribly wrong');
