@@ -21,6 +21,16 @@
             $scope.angularAjax = function(errorLevel) {
                 $timeout(function() {
                     $http[$scope.params.method.toLowerCase()]("{{ path('ajax') }}?duration="+$scope.params.duration+"&error="+(errorLevel || 0));
+                }, $scope.params.delay * 1000);
+            }
+
+            $scope.longQueryAjax = function() {
+                $timeout(function() {
+                    $http[$scope.params.method.toLowerCase()]("{{ path('ajax') }}?duration="+$scope.params.duration+"&error=0&random="+(Array.apply(0, Array(128)).map(function() {
+                        return (function(charset){
+                            return charset.charAt(Math.floor(Math.random() * charset.length))
+                        }('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'));
+                    }).join('')));
                 }, $scope.params.delay * 1000)
             }
         });
@@ -39,5 +49,8 @@
     <div>Trigger jQuery AJAX request: <a ng-click="jQueryAjax()">200</a> <a ng-click="jQueryAjax(1)">400</a> <a ng-click="jQueryAjax(2)">500</a></div>
     <div>Trigger angular AJAX request: <a ng-click="angularAjax()">200</a> <a ng-click="angularAjax(1)">400</a> <a ng-click="angularAjax(2)">500</a></div>
 
+    <div>Trigger request with long query: <a ng-click="longQueryAjax()">200</a></div>
+
+    <div ng-include="'/bundles/burgovajaxdemo/views/test.html'"></div>
 </div>
 {% endblock %}
